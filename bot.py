@@ -83,7 +83,7 @@ for start in xrange(0,990,10): # get 1000 items
 	uarr=extractHREF(resp)
 
 	for i in range(len(uarr)):
-		nl=parse_qs(urlparse(uarr[0]).query)
+		nl=parse_qs(urlparse(uarr[i]).query)
 		try:
 			ei=nl['ei']
 			break
