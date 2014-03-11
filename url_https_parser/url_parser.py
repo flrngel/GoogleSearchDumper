@@ -33,4 +33,8 @@ for data in xresult:
 result=set(sresult)
 
 for data in result:
-	print data
+	splited=data.split(":")
+	if len(splited) > 1 :
+		print splited[0], splited[1]
+	else:
+		print splited[0]
