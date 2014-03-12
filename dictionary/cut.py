@@ -15,7 +15,7 @@ def https_cnt():
 	return output.strip()
 
 def get_pids():
-	p=subprocess.Popen("pidof python", stdout=subprocess.PIPE, shell=True)
+	p=subprocess.Popen("ps aux | grep python | grep bot.py", stdout=subprocess.PIPE, shell=True)
 	(output,err)=p.communicate()
 	p_status=p.wait()
 	return output.split()
@@ -23,26 +23,23 @@ def get_pids():
 def kill(pid):
 	os.system("kill -9 %s" % pid)
 
-if len(sys.argv) < 3:
+if len(sys.argv) < 2:
 	print "usage:"
-	print sys.argv[0], "<query pid>", "<magic_number>"
+	print sys.argv[0], "<magic_number>"
 	sys.exit(0)
 
-magic_number=sys.argv[2]
+magic_number=sys.argv[1]
 
 while 1:
 	head=long(https_cnt())
 	time.sleep(20*60)
 	if head + long(magic_number) > long(https_cnt()):
 		# lower than expect
+		pid=str(os.getpid())
 		parr=get_pids()
 		try:
-			pid=str(os.getpid())
-			parr.remove(sys.argv[1])
-			parr.remove(pid)
+			killid=parr[1]
 		except:
-			pass
-		if len(parr) > 1:
-			print "too many pythons to kill"
-			break
-		kill(parr[0])
+			print "no pid to kill"
+			system.exit(0)
+		kill(killid)
