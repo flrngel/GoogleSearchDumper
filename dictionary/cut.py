@@ -32,7 +32,7 @@ magic_number=sys.argv[2]
 
 while 1:
 	head=long(https_cnt())
-	time.sleep(20*60*60)
+	time.sleep(20*60)
 	if head + long(magic_number) > long(https_cnt()):
 		# lower than expect
 		parr=get_pids()
